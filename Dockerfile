@@ -1,4 +1,4 @@
-FROM rocker/r-ubuntu:20.04
+FROM rocker/r-ubuntu:18.04
 
 MAINTAINER Markus Gesmann  <markus.gesmann@gmail.com>
 
@@ -25,36 +25,36 @@ RUN add-apt-repository ppa:cran/v8
 RUN export DEBIAN_FRONTEND=noninteractive; apt-get -y update  \
  && dpkg --configure -a \
  && apt-get -f install -y \
- libopenblas-base \
- cargo \
- rustc \
- libcurl4-gnutls-dev \
- libxml2-dev \
- libgit2-dev \
- libcairo2-dev \
- libgtk2.0-dev \
- xvfb \
- xauth \
- xfonts-base \
- libxt-dev \
- qpdf \
- pandoc \
- make \
- wget \
- libmagick++-dev \
- git \
- jags \
- libgdal-dev \
- libgeos-dev \
- libgdal20 \
- ibgeos-c1v5 \
- libproj-dev \
- liblwgeom-dev \
- libudunits2-dev \
- postgis \
- libssl-dev \
- libnode-dev \
- libssh2-1-dev
+  	libopenblas-base \
+  	cargo \
+  	rustc \
+  	libcurl4-gnutls-dev \
+  	libxml2-dev \
+  	libgit2-dev \
+  	libcairo2-dev \
+  	libgtk2.0-dev \
+  	xvfb \
+  	xauth \
+  	xfonts-base \
+  	libxt-dev \
+  	qpdf \
+	  pandoc \
+	  make \
+	  wget \
+	  libmagick++-dev \
+	  git \
+  	jags \
+  	libgdal-dev \
+  	libgeos-dev \
+  	libgdal20 \
+  	libgeos-c1v5 \
+  	libproj-dev \
+  	liblwgeom-dev \
+  	libudunits2-dev \
+  	postgis \
+  	libssl-dev \
+  	libnode-dev \
+  	libssh2-1-dev
 
 ## Update and install rstan
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -117,19 +117,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     r-cran-flextable \
     r-cran-scales
     
-ENV PATH=$PATH:/opt/TinyTeX/bin/x86_64-linux/
-
-RUN wget "https://travis-bin.yihui.name/texlive-local.deb" \
-  && dpkg -i texlive-local.deb \
-  && rm texlive-local.deb \
-  && apt-get update \
+RUN  apt-get update \
   && apt-get install -y --no-install-recommends \
     ## for rJava
     default-jdk \
     ## Nice Google fonts
     fonts-roboto \
-    ## used by some base R plots
     ghostscript \
+    lmodern \
     ## used to build rJava and other packages
     libbz2-dev \
     libicu-dev \
@@ -150,19 +145,19 @@ RUN wget "https://travis-bin.yihui.name/texlive-local.deb" \
     pandoc-citeproc \
     ## for git via ssh key
     ssh \
-    ## parallelization
-    libzmq3-dev \
-    libopenmpi-dev \
     ## LaTeX  
+    texinfo \
+    texlive-latex-recommended \
+    texlive-luatex \
+    texlive-plain-generic \
+    texlive-science \
+    texlive-xetex \
     texlive-extra-utils \
     texlive-fonts-recommended \
     texlive-fonts-extra \
-    texlive-latex-recommended \
     ## parallelization
     libzmq3-dev \
     libopenmpi-dev \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/ \ 
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/ 
   
