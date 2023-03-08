@@ -1,4 +1,4 @@
-FROM rocker/r-ubuntu:18.04
+FROM rocker/r-ubuntu:22.04
 
 MAINTAINER Markus Gesmann  <markus.gesmann@gmail.com>
 
